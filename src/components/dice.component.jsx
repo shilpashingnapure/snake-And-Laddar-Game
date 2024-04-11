@@ -23,8 +23,7 @@ export const Dice = ({ game , handleDice , currentPlayer}) => {
       }
 
     async function getDiceNumber(){
-        // let number = await rollDice();
-        let number = 6;
+        let number = await rollDice();
         handleDice(number);
     }
     

@@ -138,40 +138,13 @@ function App() {
   
  }
  
-
-  function addSnakes(){
-    if(snakes.length == 0){
-      game.board.addSnake();
-    }else{
-      game.board.addSnake(snakes);
-    }
-  }
-
-  function addLaddar(){
-    if(ladder.length == 0){
-      game.board.addLaddar();
-    }else{
-      game.board.addLaddar(ladder);
-    }
-  }
-
-  function setValues(snakes , laddar){
-    setSnakes(snakes);
-    setLadder(laddar);
-  }
-
   function startGame(players) {
     addGamePlayers(players);
-    addIntoBoard();
+    setSnakes([...game.board.snakes]);
+    setLadder([...game.board.ladder])
     setStart(true);
   }
 
-  function addIntoBoard(){
-    addSnakes();
-    setSnakes(game.board.getSnakes());
-    addLaddar();
-    setLadder(game.board.ladder);
-  }
 
   function addGamePlayers(players){
     players.map((item) => {
@@ -203,7 +176,7 @@ function App() {
              <MultiDialogs startGame={startGame}  /> 
           </div>
           <div>
-            <GameDialogs settingBoard={settingBoard} setValues={setValues}/>
+            <GameDialogs settingBoard={settingBoard} />
           </div>
           </div>
           

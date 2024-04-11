@@ -20,7 +20,7 @@ export const Snake = ({ snakes, boardSize, cellSize }) => {
               transformOrigin: "top center",
             }}
           >
-            {Math.abs(endRow - startRow) <= 4 ? (
+            { Math.abs(endRow - startRow)  <= 4 ? (
               <img src={snake} width="80px" className="s-snake" />
             ) : (
               <img src={bigSnake} className="b-snake" />

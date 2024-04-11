@@ -15,6 +15,8 @@ export class Board {
 
   board : number[][] = [];
 
+  shuffleBoard : number[] = []
+
   constructor(size : number = 10) {
     this.boardNum = size;
     let count = size * size;
@@ -27,32 +29,84 @@ export class Board {
           row[size-1-j] = count
         }
         count -= 1
+
       }
       this.board.push(row);
+    } 
+
+    if(size * size == 100){
+      this.addDefaultSnakeAndLadder(snakeDefaultValues , 'snake');
+      this.addDefaultSnakeAndLadder(ladderValues , 'laddar');
+    }else{
+      this.shuffleBoard = [...this.board.slice(1)].flat();
+      this.shuffleArray();
+      this.addSnake();
+      this.addLaddar();
+    }
+   
+    
+    
+
+  }
+
+  // when board size is 10 * 10 , add default positions for snakes and laddar
+  addDefaultSnakeAndLadder(defaultArr , type){
+    for(let i = 0 ; i < defaultArr.length ; i++){ 
+      let {start , end } = defaultArr[i];
+      if(type == 'laddar'){
+        this.ladder.push(new Laddar(start , end))
+      }else{
+        this.snakes.push(new Snake(start , end));
+      }
+    }
+  }
+
+
+  //add dynamic position for snakes and laddar
+  shuffleArray(){
+    for(let i = 0 ; i < this.boardNum ; i++){
+      let j = Math.floor(Math.random() * (i + 1));
+      [this.shuffleBoard[i] , this.shuffleBoard[j]] = [this.shuffleBoard[j] , this.shuffleBoard[i]];
+    }
+  }
+ 
+  addSnake(){
+    for(let i = 0 ; i < Math.floor(this.boardNum / 2) ; i++){
+      let index1 = Math.floor(Math.random() * this.shuffleBoard.length);
+      let start = this.shuffleBoard[index1]
+      this.shuffleBoard = this.shuffleBoard.filter((item) => item != start);
+
+      let index2 = Math.floor(Math.random() * this.shuffleBoard.length);
+      let end = this.shuffleBoard[index2]
+      this.shuffleBoard = this.shuffleBoard.filter((item) => item != end);
+
+      if(start > end){
+        this.snakes.push(new Snake(start , end));
+      }else{
+        this.snakes.push(new Snake(end , start));
+      }
     }
 
   }
 
-  addSnake(snakesValues = snakeDefaultValues){
-    for(let i = 0 ; i < snakesValues.length ; i++){
-      let {start , end} = snakesValues[i];
-      let snake = new Snake(start , end);
-      this.snakes.push(snake);
-    }
-  }
+  addLaddar(){
+    for(let i = 0 ; i < Math.floor(this.boardNum / 2) ; i++){
+      let index1 = Math.floor(Math.random() * this.shuffleBoard.length);
+      let start = this.shuffleBoard[index1]
+      this.shuffleBoard = this.shuffleBoard.filter((item) => item != start);
 
-  addLaddar(laddarValues = ladderValues){
-    for(let i = 0 ; i < laddarValues.length ; i++){
-      let {start , end} = laddarValues[i];
-      let snake = new Laddar(start , end);
-      this.ladder.push(snake);
+      let index2 = Math.floor(Math.random() * this.shuffleBoard.length);
+      let end = this.shuffleBoard[index2]
+      this.shuffleBoard = this.shuffleBoard.filter((item) => item != end);
+
+      if(start < end){
+        this.ladder.push(new Laddar(start , end));
+      }else{
+        this.ladder.push(new Laddar(end , start));
+      }
     }
-  }
-  getSnakes(){
-    return this.snakes;
   }
   
-
   status(){
     return this.board;
   }
