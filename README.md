@@ -15,7 +15,7 @@ A project is about to Snake and Laddar Game, implemented using a low-level desig
 
 ## LLD
 - Use Case
-<img width="767" alt="Screenshot 2024-08-07 at 4 04 15 PM" src="https://github.com/user-attachments/assets/d5d41951-85a3-43dc-b6b7-a774731135d0">
+<img width="942" alt="Screenshot 2024-08-07 at 4 04 15 PM" src="https://github.com/user-attachments/assets/d5d41951-85a3-43dc-b6b7-a774731135d0">
 
 - Class Diagram
 <img width="942" alt="Screenshot 2024-08-07 at 4 04 53 PM" src="https://github.com/user-attachments/assets/972d12bd-1b13-4c23-864f-649874d0044b">
